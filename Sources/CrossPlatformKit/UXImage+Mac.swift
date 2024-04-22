@@ -24,6 +24,18 @@ extension Image {
 #endif
 
 extension NSImage {
+	public convenience init?(data: Data?) {
+		guard let data else { return nil }
+		
+		self.init(data: data)
+	}
+	
+	public convenience init?(url: URL?) {
+		guard let url else { return nil }
+		
+		self.init(contentsOf: url)
+	}
+	
 	public convenience init(cgImage: CGImage) {
 		let size = CGSize(width: cgImage.width, height: cgImage.height)
 		self.init(cgImage: cgImage, size: size)

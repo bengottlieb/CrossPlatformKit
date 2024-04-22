@@ -25,6 +25,18 @@ extension Image {
 #if os(iOS)
 
 extension UIImage {
+	public convenience init?(data: Data?) {
+		guard let data else { return nil }
+		
+		self.init(data: data)
+	}
+	
+	public convenience init?(url: URL?) {
+		guard let url, url.isFileURL else { return nil }
+		
+		self.init(contentsOfFile: url.path)
+	}
+
 	static public func create(size: CGSize, drawing: @escaping (CGContext) -> Void) -> UXImage? {
 		if #available(iOS 10, *) {
 			return UIGraphicsImageRenderer(size: size).image { renderer in
